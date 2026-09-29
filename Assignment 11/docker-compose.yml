@@ -1,0 +1,24 @@
+services:
+  web:
+    image: my-flask-app:v2
+    container_name: flask-compose-web
+    ports:
+      - "8083:5001"
+    volumes:
+      - my-app-data:/app/data
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    container_name: flask-compose-redis=
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+volumes:
+  my-app-data:
+    name: my-app-data
+  redis-data:
+    name: my-multi-app-redis-data
